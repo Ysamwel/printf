@@ -6,6 +6,7 @@
 #define F_ZERO 4
 #define F_HASH 8
 #define F_SPACE 16
+#define UNUSED(x) (void)(x);
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -24,8 +25,16 @@ int handle_write_char(char c, char bufferchar[],
 int handle_print(const char *fmt, int *i,
 		va_list parameters, char bufferchar[], int flags, int width, int precision, int size);
 int is_digit(char);
-
-
+int print_characters(va_list parameters, char bufferchar[],
+	int flags, int width, int precision, int size);
+int print_str(va_list parameters, char bufferchar[],
+	int flags, int width, int precision, int size);
+int print_pct(va_list parameters, char bufferchar[],
+	int flags, int width, int precision, int size);
+int print_int(va_list parameters, char bufferchar[],
+	int flags, int width, int precision, int size);
+int print_binary(va_list parameters, char bufferchar[],
+	int flags, int width, int precision, int size);
 
 
 #endif
