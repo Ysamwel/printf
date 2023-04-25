@@ -6,25 +6,29 @@
 #define F_ZERO 4
 #define F_HASH 8
 #define F_SPACE 16
-#define UNUSED(x) (void)(x);
+#define UNUSED(x) (void)(x)
+
+#define LONG 2
+#define SHORT 1
 
 #include <stdio.h>
 #include <stdarg.h>
 #include <stddef.h>
 #include <unistd.h>
 typedef struct fmt fmt_t;
-int get_flags(const char *format, int *i);
-int get_width(const char *format, int *i, va_list parameters);
-int get_precision(const char *format, int *i, va_list parameters);
-int get_size(const char *format, int *i);
+int fetch_flags(const char *format, int *i);
+int fetch_width(const char *format, int *i, va_list parameters);
+int fetch_precision(const char *format, int *i, va_list parameters);
+int fetch_size(const char *format, int *i);
 int _printf(const char *format, ...);
 int _putchar(char c);
 void print_buffer(char bufferchar[], int *buff_int);
 int handle_write_char(char c, char bufferchar[],
 		int flags, int width, int precision, int size);
 int handle_print(const char *fmt, int *i,
-		va_list parameters, char bufferchar[], int flags, int width, int precision, int size);
-int is_digit(char);
+		va_list parameters, char bufferchar[], int flags,
+		int width, int precision, int size);
+int is_figure(char);
 int print_characters(va_list parameters, char bufferchar[],
 		int flags, int width, int precision, int size);
 int print_str(va_list parameters, char bufferchar[],
@@ -45,7 +49,8 @@ int print_hexa_upp(va_list parameters, char bufferchar[],
 		int flags, int width, int precision, int size);
 
 int print_hexa(va_list parameters, char map_loc[],
-		char bufferchar[], int flags, char flag_ch, int width, int precision, int size);
-
-
+		char bufferchar[], int flags, char flag_ch,
+		int width, int precision, int size);
+int p_rot13str(va_list parameters, char bufferchar[],
+		int flags, int width, int precision, int size);
 #endif

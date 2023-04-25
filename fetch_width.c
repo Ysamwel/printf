@@ -1,20 +1,19 @@
 #include "main.h"
-
 /**
- * get_width - calculates
+ * fetch_width - calculates
  * @format: formatted string
  * @i: arguments to be printed
  * @parameters: argument list
  * Return: the width.
  */
-int get_width(const char *format, int *i, va_list parameters)
+int fetch_width(const char *format, int *i, va_list parameters)
 {
-	int curr;
+	int curr = *i + 1;
 	int width = 0;
 
-	for (curr = *i + 1; format[curr] != '\0'; curr++)
+	while (format[curr] != '\0')
 	{
-		if (is_digit(format[curr]))
+		if (is_figure(format[curr]))
 		{
 			width *= 10;
 			width += format[curr] - '0';
@@ -26,7 +25,10 @@ int get_width(const char *format, int *i, va_list parameters)
 			break;
 		}
 		else
+		{
 			break;
+		}
+		curr++;
 	}
 
 	*i = curr - 1;

@@ -1,14 +1,12 @@
 #include "main.h"
-
 /**
- * get_precision - precision for printing
+ * fetch_precision - precision for printing
  * @format:  prints the arguments
  * @i:arguments to be printed.
  * @parameters: list of arguments.
- *
  * Return: precision
  */
-int get_precision(const char *format, int *i, va_list parameters)
+int fetch_precision(const char *format, int *i, va_list parameters)
 {
 	int curr = *i + 1;
 	int precision = -1;
@@ -17,10 +15,11 @@ int get_precision(const char *format, int *i, va_list parameters)
 		return (precision);
 
 	precision = 0;
+	curr++;
 
-	for (curr += 1; format[curr] != '\0'; curr++)
+	while (format[curr] != '\0')
 	{
-		if (is_digit(format[curr]))
+		if (is_figure(fmt[curr]))
 		{
 			precision *= 10;
 			precision += format[curr] - '0';
@@ -32,10 +31,14 @@ int get_precision(const char *format, int *i, va_list parameters)
 			break;
 		}
 		else
+		{
 			break;
+		}
+		curr++;
 	}
 
 	*i = curr - 1;
 
 	return (precision);
 }
+
