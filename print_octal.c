@@ -18,7 +18,7 @@ int print_octal(va_list parameters, char bufferchar[],
 
 	UNUSED(width);
 
-	fig = convert_size_unsign(fig, size);
+	fig = cnvt_size_unsign(fig, size);
 
 	if (fig == 0)
 		bufferchar[i--] = '0';

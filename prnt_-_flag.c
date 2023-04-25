@@ -28,7 +28,7 @@ int p_non_print(va_list parameters, char bufferchar[],
 		if (is_print(string[i]))
 			bufferchar[i + ofst] = string[i];
 		else
-			ofst += append_hexa_code(string[i], bufferchar, i + ofst);
+			ofst += app_hex_code(string[i], bufferchar, i + ofst);
 
 		i++;
 	}

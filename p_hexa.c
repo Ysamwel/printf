@@ -52,7 +52,7 @@ int print_hexa_upp(va_list parameters, char bufferchar[],
 
 	UNUSED(width);
 
-	fig = convert_size_unsign(fig, size);
+	fig = cnvt_size_unsign(fig, size);
 
 	if (fig == 0)
 		bufferchar[i--] = '0';
@@ -72,6 +72,6 @@ int print_hexa_upp(va_list parameters, char bufferchar[],
 
 	i++;
 
-	return (write_unsgnd(0, i, bufferchar, flags, width, precision, size));
+	return (write_unsign(0, i, bufferchar, flags, width, precision, size));
 }
 

@@ -24,7 +24,7 @@ int handle_print(const char *format, int *ind, va_list parameters, char bufferch
 		{'r', p_reverse}, {'R', p_rot13str}, {'\0', NULL}
 	};
 
-	while (fmt_types[i].format != '\0')
+	while (fmt_types[i].fmt != '\0')
 	{
 		if (format[*ind] == fmt_types[i].fmt)
 		{
@@ -33,7 +33,7 @@ int handle_print(const char *format, int *ind, va_list parameters, char bufferch
 		i++;
 	}
 
-	if (fmt_types[i].format == '\0')
+	if (fmt_types[i].fmt == '\0')
 	{
 		if (format[*ind] == '\0')
 		{

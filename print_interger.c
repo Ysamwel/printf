@@ -17,7 +17,7 @@ int print_int(va_list parameters, char bufferchar[],
 	long int j = va_arg(parameters, long int);
 	unsigned long int num;
 
-	j = convert_size_number(j, size);
+	j = cnvt_size_int(j, size);
 
 	if (j == 0)
 		bufferchar[i--] = '0';

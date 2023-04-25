@@ -19,7 +19,7 @@ int fetch_precision(const char *format, int *i, va_list parameters)
 
 	while (format[curr] != '\0')
 	{
-		if (is_figure(fmt[curr]))
+		if (is_figure(format[curr]))
 		{
 			precision *= 10;
 			precision += format[curr] - '0';

@@ -7,7 +7,7 @@
 #define F_HASH 8
 #define F_SPACE 16
 
-#define UNUSED(x) (void)(x);
+#define UNUSED(x) (void)(x)
 #define LONG 2
 #define SHORT 1
 
@@ -15,12 +15,12 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <unistd.h>
-typedef struct fmt fmt_t;
 struct fmt
 {
 	char fmt;
 	int (*fn)(va_list, char[], int, int, int, int);
-}
+};
+typedef struct fmt fmt_t;
 int fetch_flags(const char *format, int *i);
 int fetch_width(const char *format, int *i, va_list parameters);
 int fetch_precision(const char *format, int *i, va_list parameters);

@@ -75,7 +75,7 @@ int write_number(int is_negative, int ind, char bufferchar[],
 	else if (flags & F_SPACE)
 		ext_ch = ' ';
 
-	return (write_number(ind, bufferchar, flags, width, precision,
+	return (write_num(ind, bufferchar, flags, width, precision,
 				len, padd, ext_ch));
 }
 /**
@@ -118,9 +118,11 @@ int write_num(int ind, char bufferchar[],
 
 		bufferchar[i] = '\0';
 		if (flags & F_MINUS && padd == ' ')
+		{
 			if (ext_c)
 				bufferchar[--ind] = ext_c;
 			return (write(1, &bufferchar[ind], len) + write(1, &bufferchar[1], i - 1));
+		}
 		else if (!(flags & F_MINUS) && padd == ' ')
 			if (ext_c)
 				bufferchar[--ind] = ext_c;
@@ -228,17 +230,17 @@ int write_pointer(char bufferchar[], int ind, int len,
 		}
 		else if (!(flags & F_MINUS) && padd == ' ')
 			bufferchar[--ind] = 'x';
-			bufferchar[--ind] = '0';
-			if (ext_c)
-				bufferchar[--ind] = ext_c;
-			return (write(1, &bufferchar[3], i - 3) + write(1, &bufferchar[ind], len));
+		bufferchar[--ind] = '0';
+		if (ext_c)
+			bufferchar[--ind] = ext_c;
+		return (write(1, &bufferchar[3], i - 3) + write(1, &bufferchar[ind], len));
 		else if (!(flags & F_MINUS) && padd == '0')
 			if (ext_c)
 				bufferchar[--padding_start] = ext_c;
-			bufferchar[1] = '0';
-			bufferchar[2] = 'x';
-			return (write(1, &bufferchar[padding_start], i - padding_start) +
-					write(1, &bufferchar[ind], len - (1 - padding_start) - 2));
+		bufferchar[1] = '0';
+		bufferchar[2] = 'x';
+		return (write(1, &bufferchar[padding_start], i - padding_start) +
+				write(1, &bufferchar[ind], len - (1 - padding_start) - 2));
 	}
 
 	bufferchar[--ind] = 'x';

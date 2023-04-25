@@ -31,7 +31,7 @@ int app_hex_code(char ascii_code, char bufferchar[], int i)
 	bufferchar[i++] = 'x';
 
 	bufferchar[i++] = map_loc[ascii_code / 16];
-	bufferchar[i] = map_for[ascii_code % 16];
+	bufferchar[i] = map_loc[ascii_code % 16];
 
 	return (3);
 }

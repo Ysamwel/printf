@@ -16,7 +16,7 @@ int print_unsigned_int(va_list parameters, char bufferchar[],
 	int i = BUFF_SIZE - 2;
 	unsigned long int fig = va_arg(parameters, unsigned long int);
 
-	fig = convert_size_unsign(fig, size);
+	fig = cnvt_size_unsign(fig, size);
 
 	if (fig == 0)
 		bufferchar[i--] = '0';
