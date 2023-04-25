@@ -59,9 +59,28 @@ int print_hexa(va_list parameters, char map_loc[],
 int p_rot13str(va_list parameters, char bufferchar[],
 		int flags, int width, int precision, int size);
 int p_reverse(va_list parameters, char bufferchar[],
-                int flags, int width, int precision, int size);
+		int flags, int width, int precision, int size);
 int p_pointer(va_list parameters, char bufferchar[],
-                int flags, int width, int precision, int size);
+		int flags, int width, int precision, int size);
 int p_non_print(va_list parameters, char bufferchar[],
-                        int flags, int width, int precision, int size);
+		int flags, int width, int precision, int size);
+int handle_write_char(char c, char bufferchar[],
+		int flags, int width, int precision, int size);
+int write_number(int is_negative, int ind, char bufferchar[],
+		int flags, int width, int precision, int size);
+int write_num(int ind, char bufferchar[],
+		int flags, int width, int precision,
+		int len, char padd, char ext_c);
+int write_unsign(int is_negative, int ind,
+		char bufferchar[],
+		int flags, int width, int precision, int size);
+int write_pointer(char bufferchar[], int ind, int len,
+		int width, int flags, char padd, char ext_c, int padding_start);
+int is_print(char c);
+int app_hex_code(char ascii_code, char bufferchar[], int i);
+int is_figure(char c);
+long int cnvt_size_int(long int fig, int size);
+int is_figure(char c);
+long int cnvt_size_int(long int fig, int size);
+long int cnvt_size_unsign(unsigned long int fig, int size);
 #endif
