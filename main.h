@@ -6,8 +6,8 @@
 #define F_ZERO 4
 #define F_HASH 8
 #define F_SPACE 16
-#define UNUSED(x) (void)(x)
 
+#define UNUSED(x) (void)(x);
 #define LONG 2
 #define SHORT 1
 
@@ -16,6 +16,11 @@
 #include <stddef.h>
 #include <unistd.h>
 typedef struct fmt fmt_t;
+struct fmt
+{
+	char fmt;
+	int (*fn)(va_list, char[], int, int, int, int);
+}
 int fetch_flags(const char *format, int *i);
 int fetch_width(const char *format, int *i, va_list parameters);
 int fetch_precision(const char *format, int *i, va_list parameters);
@@ -43,7 +48,7 @@ int print_unsigned_int(va_list parameters, char bufferchar[],
 		int flags, int width, int precision, int size);
 int print_octal(va_list parameters, char bufferchar[],
 		int flags, int width, int precision, int size);
-int print_hexadecimal(va_list parameters, char bufferchar[],
+int p_hexadecimal(va_list parameters, char bufferchar[],
 		int flags, int width, int precision, int size);
 int print_hexa_upp(va_list parameters, char bufferchar[],
 		int flags, int width, int precision, int size);
@@ -53,4 +58,10 @@ int print_hexa(va_list parameters, char map_loc[],
 		int width, int precision, int size);
 int p_rot13str(va_list parameters, char bufferchar[],
 		int flags, int width, int precision, int size);
+int p_reverse(va_list parameters, char bufferchar[],
+                int flags, int width, int precision, int size);
+int p_pointer(va_list parameters, char bufferchar[],
+                int flags, int width, int precision, int size);
+int p_non_print(va_list parameters, char bufferchar[],
+                        int flags, int width, int precision, int size);
 #endif
