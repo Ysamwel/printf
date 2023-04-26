@@ -7,7 +7,6 @@
  * @width: gets width of char
  * @precision: finds the precision specifier
  * @size: the size specifier
- *
  * Return: character printed
  */
 int handle_write_char(char c, char bufferchar[],
@@ -55,7 +54,6 @@ int handle_write_char(char c, char bufferchar[],
  * @width: gets the width of character
  * @precision: gets precision specifier
  * @size: the size specifier
- *
  * Return: characters printed.
  */
 int write_number(int is_negative, int ind, char bufferchar[],
@@ -84,38 +82,31 @@ int write_number(int is_negative, int ind, char bufferchar[],
  * @bufferchar: handles the buffer array
  * @flags: finds active flags
  * @width: width of characters
- * @precision:the character precision specifier
+ * @prc:the character precision specifier
  * @len: its number length
  * @padd: the Padding of chararacters
  * @ext_c: Extra characters to be printed
- *
- * Return: Number of printed chars.
+ * Return: printed characters
  */
-int write_num(int ind, char bufferchar[],
-		int flags, int width, int precision,
-		int len, char padd, char ext_c)
+int write_num(int ind, char bufferchar[], int flags,
+		int width, int prc, int len, char padd, char ext_c)
 {
 	int i, padding_start = 1;
 
-	if (precision == 0 && ind == BUFF_SIZE - 2 &&
-			bufferchar[ind] == '0' && width == 0)
+	if (prc == 0 && ind == BUFF_SIZE - 2 && bufferchar[ind] == '0' && width == 0)
 		return (0);
-	if (precision == 0 && ind == BUFF_SIZE - 2 && bufferchar[ind] == '0')
+	if (prc == 0 && ind == BUFF_SIZE - 2 && bufferchar[ind] == '0')
 		bufferchar[ind] = padd = ' ';
-	if (precision > 0 && precision < len)
+	if (prc > 0 && prc < len)
 		padd = ' ';
-
-	for (; precision > len; --ind, ++len)
-		bufferchar[ind - 1] = '0';
-
+	for (; prc > len; len++)
+		bufferchar[--ind] = '0';
 	if (ext_c != 0)
 		len++;
-
 	if (width > len)
 	{
-		for (i = 1; i < width - len + 1; ++i)
+		for (i = 1; i < width - len + 1; i++)
 			bufferchar[i] = padd;
-
 		bufferchar[i] = '\0';
 		if (flags & F_MINUS && padd == ' ')
 		{
@@ -124,16 +115,19 @@ int write_num(int ind, char bufferchar[],
 			return (write(1, &bufferchar[ind], len) + write(1, &bufferchar[1], i - 1));
 		}
 		else if (!(flags & F_MINUS) && padd == ' ')
+		{
 			if (ext_c)
 				bufferchar[--ind] = ext_c;
 			return (write(1, &bufferchar[1], i - 1) + write(1, &bufferchar[ind], len));
+		}
 		else if (!(flags & F_MINUS) && padd == '0')
+		{
 			if (ext_c)
 				bufferchar[--padding_start] = ext_c;
 			return (write(1, &bufferchar[padding_start], i - padding_start) +
 					write(1, &bufferchar[ind], len - (1 - padding_start)));
+		}
 	}
-
 	if (ext_c)
 		bufferchar[--ind] = ext_c;
 	return (write(1, &bufferchar[ind], len));
@@ -143,15 +137,13 @@ int write_num(int ind, char bufferchar[],
  * @is_negative: value indicating a negative number
  * @ind: Index at start of buffer
  * @bufferchar: handles buffer array
- * @flags; it finds a active flag
+ * @flags: it finds a active flag
  * @width: width of character
  * @precision: the precision specification
  * @size: the size of specifiers
- *
  * Return: character printed
  */
-int write_unsign(int is_negative, int ind,
-		char bufferchar[],
+int write_unsign(int is_negative, int ind, char bufferchar[],
 		int flags, int width, int precision, int size)
 {
 	int len = BUFF_SIZE - ind - 1, i = 0;
@@ -203,7 +195,6 @@ int write_unsign(int is_negative, int ind,
  * @padd: Characters standing for padding
  * @ext_c: characters that are extra
  * @padding_start: the index for padding start
- *
  * Return: characters printed
  */
 int write_pointer(char bufferchar[], int ind, int len,
@@ -229,11 +220,13 @@ int write_pointer(char bufferchar[], int ind, int len,
 			return (write(1, &bufferchar[ind], len) + write(1, &bufferchar[3], i - 3));
 		}
 		else if (!(flags & F_MINUS) && padd == ' ')
+		{
 			bufferchar[--ind] = 'x';
-		bufferchar[--ind] = '0';
-		if (ext_c)
-			bufferchar[--ind] = ext_c;
-		return (write(1, &bufferchar[3], i - 3) + write(1, &bufferchar[ind], len));
+			bufferchar[--ind] = '0';
+			if (ext_c)
+				bufferchar[--ind] = ext_c;
+			return (write(1, &bufferchar[3], i - 3) + write(1, &bufferchar[ind], len));
+		}
 		else if (!(flags & F_MINUS) && padd == '0')
 			if (ext_c)
 				bufferchar[--padding_start] = ext_c;
@@ -242,7 +235,6 @@ int write_pointer(char bufferchar[], int ind, int len,
 		return (write(1, &bufferchar[padding_start], i - padding_start) +
 				write(1, &bufferchar[ind], len - (1 - padding_start) - 2));
 	}
-
 	bufferchar[--ind] = 'x';
 	bufferchar[--ind] = '0';
 	if (ext_c)

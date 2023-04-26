@@ -15,6 +15,11 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <unistd.h>
+/**
+ * struct fmt - struct op
+ * @fmt: format
+ * @fn: associated function
+ */
 struct fmt
 {
 	char fmt;
