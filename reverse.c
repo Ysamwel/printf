@@ -25,23 +25,19 @@ int p_reverse(va_list parameters, char bufferchar[],
 
 	if (string == NULL)
 	{
+		UNUSED(precision);
 
 		string = ")Null(";
 	}
+	for (i = 0; string[i]; i++)
+		;
 
-	i = 0;
-	do {
-		i++;
-	} while (string[i]);
+	for (i = i - 1; i >= 0; i--)
+	{
+		char z = string[i];
 
-	i--;
-	do {
-		char j = string[i];
-
-		write(1, &j, 1);
+		write(1, &z, 1);
 		count++;
-		i--;
-	} while (i >= 0);
-
+	}
 	return (count);
 }
